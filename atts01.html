@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Itens</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Adicionar e Remover Itens da Lista</h1>
+        
+        <div class="form">
+            <input type="text" id="itemInput" placeholder="Digite o item">
+            <button id="addItemButton">Adicionar Item</button>
+        </div>
+        
+        <ul id="itemList"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+<script>
+   
+const addItemButton = document.getElementById('addItemButton');
+const itemInput = document.getElementById('itemInput');
+const itemList = document.getElementById('itemList');
+
+function addItem() {
+    const itemText = itemInput.value.trim();
+
+    if (itemText === '') {
+        alert('Por favor, digite um item.');
+        return;
+    }
+
+    const li = document.createElement('li');
+    li.innerHTML = `${itemText} <button onclick="removeItem(this)">Remover</button>`;
+    itemList.appendChild(li);
+    itemInput.value = '';
+    itemInput.focus();
+}
+
+function removeItem(button) {
+    const li = button.parentElement;
+    li.remove();
+}
+addItemButton.addEventListener('click', addItem);
+itemInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        addItem();
+    }
+});
+
+</script>
